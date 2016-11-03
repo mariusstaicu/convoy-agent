@@ -86,7 +86,7 @@ func volumeAgent(c *cli.Context) {
 	resultChan := make(chan error)
 
 	if strings.Contains(components, "driver") {
-		go func(rc chan<- error) {
+		go func(rc chan <- error) {
 			cmdArgs := buildConvoyCmdArgs(c, socket)
 			cmd := exec.Command("convoy", cmdArgs...)
 			logrus.Infof("Launching convoy with args: %s", cmdArgs)
@@ -99,7 +99,7 @@ func volumeAgent(c *cli.Context) {
 	}
 
 	if strings.Contains(components, "agent") {
-		go func(rc chan<- error) {
+		go func(rc chan <- error) {
 			controlChan := make(chan bool, 1)
 			cattleClient, err := cattle.NewCattleClient(cattleUrl, cattleAccessKey, cattleSecretKey)
 			if err != nil {
